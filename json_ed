@@ -1,0 +1,17 @@
+{
+	"test": {
+		"data_name": "test",
+		"data_size": 11721,
+		"data_source": "ohlc_stock_5min",
+		"end_date": "20151231 00:00:00.000",
+		"first_datatime": "20150105 09:35:00.000",
+		"freq_in_secs": 300,
+		"last_datatime": "20151231 15:00:00.000",
+		"owner": "wzx",
+		"start_date": "20150101 00:00:00.000",
+		"symbol_list": [
+			"SZSE-300251"
+		]
+	}
+}
+##

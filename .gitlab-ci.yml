@@ -1,0 +1,41 @@
+before_script:
+ - echo $HOME
+ - export PATH="$HOME/.local/julia-1.5.3/bin:$PATH"
+ - echo $PATH
+
+after_script:
+ - echo "after script"
+
+stages:
+ - install
+ - test
+ - maintest
+ 
+import_pkg:
+ stage: install
+ script:
+  - pwd;
+  - cd src
+  - julia importPkg.jl
+
+inter_test:
+ stage: test
+ script:
+  - pwd; 
+  - cd src
+  - julia test_opt.jl ../data/price_df_clean.tsv
+
+main_test:
+ stage: maintest
+ script:
+  - pwd; 
+  - cd src
+  - echo "test type1 - fix covariance,dynamic stock vol"
+  - julia main_test.jl --price_path ../data/price_df_clean.tsv --return_path ../data/df_sim_r.csv
+    --out_path ../data/asset_res1.csv
+  - echo "test type2 - fix covariance,fix stock vol"
+  - julia main_test.jl --price_path ../data/price_df_clean.tsv --return_path ../data/df_sim_r.csv
+   --out_path ../data/asset_res2.csv --ftype 2
+  - echo "test type3 - covariance of sliding window "
+  - julia main_test.jl --price_path ../data/price_df_clean.tsv --return_path ../data/df_sim_r.csv
+   --out_path ../data/asset_res3.csv --ftype 3
