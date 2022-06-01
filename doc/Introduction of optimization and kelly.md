@@ -8,9 +8,9 @@
   - [2.2 Solve QP by CVXOPT](#22-solve-qp-by-cvxopt)
 
 # 1 The Kelly criterion for optimal portfolio allocation
-Kelly规则是最大化 $`E\{log(X)\}`$, the expected value of the logarithm of the (random variable) capital X.
+Kelly规则是最大化 $ E\{log(X)\} $, the expected value of the logarithm of the (random variable) capital X.
 
-Thorp 推导出这规则等价于最大化资本增长系数（growth rate coefficient）的期望: $`E\{log(P_t/P_0)\}`$，而不是资本期望的最大化: $`E(P_t)`$ 。
+Thorp 推导出这规则等价于最大化资本增长系数（growth rate coefficient）的期望: $ E\{log(P_t/P_0)\} $，而不是资本期望的最大化: $ E(P_t) $ 。
 
 
 参考：Chapter 8.4 The theory for a portfolio of securities of Thorp_2007.
@@ -133,40 +133,40 @@ $`f_i>=0,i=1,...,n`$，
 
 Minimize:
 
-$`-\sum^{n}_{i=1}{f_i}r_i+\frac{1}{2}\sum^{n}_{i}\sum^{n}_{j}cov(r_i,r_j)f_i f_j`$  
+$ -\sum^{n}_{i=1}{f_i}r_i+\frac{1}{2}\sum^{n}_{i}\sum^{n}_{j}cov(r_i,r_j)f_i f_j $  
 
 subject to: 
 
-$`\sum^{n}_{i=1}{f_i}=1 `$  
-$`-f_i<=0,i=1,...`$  
+$ \sum^{n}_{i=1}{f_i}=1 $  
+$ -f_i<=0,i=1,... $  
 
 
 
 ## 2.2 Solve QP by CVXOPT 
 
-$`
+$
   Q=  \begin{bmatrix}
    cov(r_0,r_0)      & cov(r_0,r_1)      & \cdots & cov(r_0,r_n)      \\
    cov(r_1,r_0)      & cov(r_1,r_1)      & \cdots & cov(r_1,r_n)      \\
    \vdots & \vdots & \ddots & \vdots \\
    cov(r_n,r_0)      & cov(r_n,r_1)      & \cdots & cov(r_n,r_n)      \\
   \end{bmatrix}
-`$
+$
 
-$`
+$
   G= - \begin{bmatrix}
    1      & 0      & \cdots & 0      \\
    0      & 1      & \cdots & 0      \\
    \vdots & \vdots & \ddots & \vdots \\
    0      & 0      & \cdots & 1      \\
   \end{bmatrix}
-`$
+$
 
-$`h^T=[0,...,0]`$
+$ h^T=[0,...,0] $
 
-$`A=[1,...,1]`$
+$ A=[1,...,1] $
 
-$`b=1`$  
+$ b=1 $  
 
 将所有numpy array 转换为CVXOPT (Python package) matrix调用sol=solvers.qp(Q,p,G, h, A, b)可解
 sol['x']即为所解结果。
