@@ -1,7 +1,7 @@
-- [Bear](#bear)
+- [Kelly Criterion](#Kelly Criterion)
 
 
-# Bear
+# Kelly Criterion
 
 - data：simulation result。
 - doc：documentation of  Kelly Criterion interpretation and program.　　
